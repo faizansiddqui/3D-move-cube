@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> 3D CUBE ROTATE PROJECT </title>
+    </head>
+
+    <body>
+
+        <div class="canvas">
+            <div class="cube">
+                <div class="face">A</div>
+                <div class="face">B</div>
+                <div class="face">C</div>
+                <div class="face">D</div>
+                <div class="face">E</div>
+                <div class="face">F</div>
+            </div> 
+        </div>
+        
+
+        <style>
+            html, body{
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100vh;
+                font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+                cursor: crosshair;
+            }
+            *{
+                box-sizing: border-box;
+            }
+
+            .canvas{
+                position: relative;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-image: radial-gradient(ellipse, rgb(89, 0, 255) 0%, rgb(32, 14, 96) 40%, rgb(10, 0, 34) 100%);
+                perspective: 850px;
+            }
+            .canvas .cube{
+                position: absolute;
+                width: 200px;
+                height: 200px;
+                transform-origin: 50% 50% 150px;
+                transform-style: preserve-3d;
+                transition: all 0.5s ease-out;
+                background-color: beige;
+            }
+            .cube .face{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 180px;
+                color: transparent;
+                -webkit-text-stroke: 5px white;
+
+            }
+            .cube .face:nth-child(1){
+                transform: translateZ(200px);
+                background-color: rgb(238, 141, 14, 0.5);
+            }
+            
+            .cube .face:nth-child(2){
+                transform-origin: center right;
+                transform: rotateY(90deg);
+                background-color: rgba(0, 169, 175, 0.5);
+            }
+            .cube .face:nth-child(3){
+                transform-origin: center center;
+                transform: rotateY(180deg);
+                background-color: rgb(255, 127, 80, 0.5);
+            }
+            .cube .face:nth-child(4){
+                transform-origin: center left;
+                transform: rotateY(-90deg);
+                background-color: rgba(0, 80, 0, 0.302);
+            }
+            .cube .face:nth-child(5){
+                transform-origin: top center;
+                transform: rotateX(90deg);
+                background-color: rgb(130, 0, 0, 0.5);
+            }
+            .cube .face:nth-child(6){
+                transform-origin: bottom center;
+                transform: rotateX(-90deg);
+                background-color: rgb(30, 143, 255, 0.5);
+            }
+
+        </style>
+
+        <script>
+            function rotatecube(e){
+
+                var cube = document.getElementsByClassName('cube'); 
+                var x = e.clientX - window.innerWidth / 2;
+                var y = e.clientY - window.innerHeight / 2;
+                var q = 0.15;
+                var i;
+
+                x = x * q * 1.25;
+                y = -y * q * 1.25;
+
+                for(i = 0; i < cube.length; i++){
+                    cube[i].style.transform = "rotateY("+ x +"deg) rotateX(" + y +"deg)";
+                }
+
+                
+            }
+            document.addEventListener("mousemove", rotatecube);
+        </script>
+    </body>
+</html>
